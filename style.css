@@ -1,5 +1,35 @@
+body{
+    background-color: #a8bf7e;
+}
+
+.calculator {
+    background-color:#a0d0ea ;
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    padding: 30px;
+}
+.number-area {
+    background-color: #f3fdec;
+    max-width: 400px;
+    min-height: 75px;
+    
+}
 .btn {
+    background-color: #efefef;
     min-width: 100px;
     min-height: 100px;
-    font-size: larger;
+    font-size: 50px;
+    color: #4a4e6b;
+}
+
+#C {
+    background-color: #fe9fa9;
+}
+
+#multi, #div, #sub, #add {
+
+    background-color:#efff93;
+
+
 }
