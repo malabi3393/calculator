@@ -18,6 +18,10 @@ body{
 
     
 }
+.row{
+    display: flex;
+
+}
 
 .calculator {
     background-color:#a0d0ea ;
@@ -31,8 +35,8 @@ body{
     min-height: 100px;
     font-size: 50px;
     color: #4a4e6b;
-    /* padding : 30px; */
     margin:5px;
+    
 }
 
 #C {
