@@ -10,7 +10,7 @@ var calculation = '';
 var nOperators = 0;
 var arr = [];
 
-aNumber = '';
+var aNumber = '';
 
 // for (btn in buttons) {
 
@@ -23,48 +23,32 @@ buttons.forEach(btn =>btn.addEventListener('click', addToString));
 console.log(numberArea.textContent);
 
 function addToString(e) {
-    //get the id of the button clicked
-    console.log(e.target.id);
-    if (e.target.id !== 'add' && e.target.id !== 'sub' && e.target.id !== 'multi' && e.target.id !== 'div' 
-    && e.target.id !== 'C' && e.target.id !== '=') {
+    var symbol = e.target.textContent;
+    symbol = symbol.trim();
+
+    if (!isNaN(symbol)) {
         numberArea.textContent += e.target.id;
         calculation += e.target.id;
         console.log(`the value of calculation is ${calculation}`);
     } else {
-        // if (e.target.id === 'add' || e.target.id === 'sub' || e.target.id === 'multi' || e.target.id === 'div') {
-            
-        // }
-        if (e.target.id === 'add') {
-            //add the + sign 
-            calculation += '+';
-            numberArea.textContent = '';
-            nOperators ++;
-            console.log(calculation);
-        } else if (e.target.id === 'sub') {
-            //add the - sign 
-            calculation += '-';
-            numberArea.textContent = '';
-            nOperators ++;
-            console.log(calculation);
-        } else if (e.target.id === 'multi') {
-            //add the * sign 
-            calculation += '*';
-            numberArea.textContent = '';
-            nOperators ++;
-        } else if (e.target.id === 'div') {
-            //add the / sign 
-            calculation += '/';
-            numberArea.textContent = '';
-            nOperators ++;
-        } else if (e.target.id === 'C') {
+
+        if (e.target.id === 'C') {
             //clear both the screen and the calculation screen
             calculation = '';
             numberArea.textContent = '';
             console.log(calculation);
         } else {
-            //call the function to turn the string into an array
-            convertToArray(calculation);
+            //increase the number of operators
+            nOperators++;
+            //push the number and the symbol (this is the case where a operator button is pressed)
+            arr.push(calculation);
+            arr.push(symbol);
+            numberArea.textContent = '';
+
+            calculation = '';
+            console.log(`the array rn is is ${arr}`);
         }
+
     } if (nOperators == 2) {
         nOperators = 1;
         convertToArray(calculation);
