@@ -24,27 +24,27 @@ buttons.forEach(btn =>btn.addEventListener('click', addToString));
 
 
 function addToString(e) {
-
-    
+    //get the text content of the button that is clicked
     var symbol = e.target.textContent;
+    //if there is any whitespace, remove it
     symbol = symbol.trim();
-
     //what is pressed is a number - do not increase nOperators here 
      if (!isNaN(symbol)) {
-        //find the button in the array
+        //if there has been an operator button that was previously clicked, we are going to change it back to its original color
         let clickedButton = opButtonInfo.find(item => item.clicked === true);
+        //if there is a button that has been clicked, we change it back to the original operator button color
         if (clickedButton !== undefined) {
             clickedButton.clicked = false;
             let theButton = document.getElementById(clickedButton.id);
             theButton.style.backgroundColor = '#efff93';
         }
+        //if there is a number currently being displayed on our screen, we want to remove it so what the user adds does not concatenate with it 
         if (prevNum === true) {
             prevNum = false;
             numberArea.textContent = '';
-            numberArea.textContent += symbol;
-        } else {
-            numberArea.textContent += symbol;
-        }
+        
+        } 
+        numberArea.textContent += symbol;
         currentNumber += symbol;
     } 
     //when what has been pressed is not a number
@@ -54,17 +54,11 @@ function addToString(e) {
             //clear both the screen and the currentNumber screen
             currentNumber = '';
             numberArea.textContent = '';
-            //console.log(currentNumber);
         } else if (e.target.id === '=') {
 
-            //console.log(currentNumber);
             //push the number (might need to add number checking) on the array
 
             arr.push(currentNumber);
-
-            //lets just check the length; at this point it should be 3
-            //console.log(arr.length);
-
             //perform operation on the last three elements in the array
             var calc = operate(arr[0], arr[1], arr[2]);
 
@@ -93,8 +87,6 @@ function addToString(e) {
         //user clicked an operator symbol
         else {
 
-            
-
             //get the id of the symbol
             var id = e.target.id;
 
@@ -114,31 +106,30 @@ function addToString(e) {
             opButton.style.backgroundColor = '#b5c26e';
 
 
+            //add the current number to the 'stack' (aka array)
             arr.push(currentNumber);
+            //push the operator symbol to the array
             arr.push(symbol);
-            numberArea.textContent = '';
+
+            // numberArea.textContent = '';
             
             //increase the number of operators
             nOperators++;
             if (performOperation(nOperators)) {
-                // debugger;
+
                 prevNum = true;
                 var num = operate(arr[0], arr[1], arr[2]);
                 numberArea.textContent = num.toString();
-                //console.log(num);
-                //console.log(arr);
-                //console.log(`the number of operators is ${nOperators}`);
                 arr = arr.slice(arr.length-1);
-                //console.log(arr);
+                //adds the currently calculated number to the screen
                 arr.splice(0,0, num);
                 
 
             }
             //push the number and the symbol (this is the case where a operator button is pressed)
-
-
             currentNumber = '';
-            // //console.log(`the array rn is is ${arr}`);
+            prevNum = true;
+        
         }
 
     } 
