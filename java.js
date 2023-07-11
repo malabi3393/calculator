@@ -110,21 +110,18 @@ function addToString(e) {
             arr.push(currentNumber);
             //push the operator symbol to the array
             arr.push(symbol);
-
-            // numberArea.textContent = '';
-            
             //increase the number of operators
             nOperators++;
             if (performOperation(nOperators)) {
 
                 prevNum = true;
                 var num = operate(arr[0], arr[1], arr[2]);
-                numberArea.textContent = num.toString();
-                arr = arr.slice(arr.length-1);
                 //adds the currently calculated number to the screen
+                numberArea.textContent = num.toString();
+                //remove all elements of the array except the last one
+                arr = arr.slice(arr.length-1);
+                //add the newly calculated number to the front of the array
                 arr.splice(0,0, num);
-                
-
             }
             //push the number and the symbol (this is the case where a operator button is pressed)
             currentNumber = '';
